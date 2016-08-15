@@ -54,3 +54,8 @@ Temporary Items
 .settings/org.eclipse.jdt.core.prefs
 /bin
 /.settings
+
+# Intellij
+# =========================
+/.idea
+JavaGameMichaelS.iml
