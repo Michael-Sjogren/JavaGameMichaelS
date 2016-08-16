@@ -21,16 +21,17 @@ public class View {
     private Canvas foregroundCanvas , backgroundCanvas;
     private GraphicsContext g , g2;
     private Image img;
+   
 
-
+    
 
         AnimationTimer engine = new AnimationTimer()
         {
             @Override
             public void handle(long now)
             {
-                entity.tick();
                 render();
+                entity.tick();
             }
         };
 
@@ -65,11 +66,11 @@ public class View {
         root.setPrefSize(WIDTH , HEIGHT);
         g = getForeground().getGraphicsContext2D();
         g2 = getBackgroundCanvas().getGraphicsContext2D();
-
-         img = new Image("Images/dark_background.png");
-
+        img = new Image("Images/dark_background.png");
+        g2.drawImage(img,0,0);
+        l.drawTiles(g2);
         root.getChildren().addAll(getBackgroundCanvas(),getForeground());
-
+        // starts animation timer
         engine.start();
         return root;
     }
@@ -77,8 +78,8 @@ public class View {
    public void render(){
         g.clearRect(0, 0 , WIDTH , HEIGHT);
         // background
-        g2.drawImage(img,0,0);
-        l.drawTiles(g2);
+        
+        
        // visually represents all objects generated from 2dMap.json thease object are solid, The player cant move trough them.
 
        //  map.drawMap(g);
@@ -87,5 +88,5 @@ public class View {
        // on the canvas i still have to figure out a way to draw the entities in a better way so it can be in accordance with layers
         entity.draw(g);
     }
-
 }
+
