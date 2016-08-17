@@ -6,13 +6,13 @@ Just a simple game made in javafx with rectangular collision detection and gravi
 
 #### **Instructions**
 
-##### **SPACE : Shoot**
+##### **SPACE : SHOOT**
 
-##### **W : JUMP**
+##### **W :   JUMP**
 
-##### **A : LEFT**
+##### **A :   LEFT**
 
-##### **D : RIGHT**
+##### **D :   RIGHT**
 
 I've also been working on implementing code to read the save files from the program:  
 [Tiled](http://www.mapeditor.org/ "Tiled Map Editor")
