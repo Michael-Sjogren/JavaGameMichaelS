@@ -10,7 +10,7 @@ public class Main extends Application  {
     private Entity entity;
     private KeyInput keyInput;
     private MapObjects map;
-
+    public static int NUMBER_OF_INSTANCES = 0;
     public static void main(String[] args) {
         launch(args);
     }
@@ -31,7 +31,7 @@ public class Main extends Application  {
         // adding event handler
         stage.addEventHandler(KeyEvent.ANY ,keyInput);
 
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
 
     }

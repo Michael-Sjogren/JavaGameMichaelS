@@ -10,8 +10,9 @@ public class BBox {
     public double getMinX() {
         return minX;
     }
-    public static ArrayList<BBox> bBoxes = new ArrayList<>();
+    public static ArrayList<BBox> solidBBoxes = new ArrayList<>();
     public static ArrayList<Dimension2D> dimension2Ds = new ArrayList<>();
+    public static ArrayList<BBox> projectileBBoxes = new ArrayList<>();
     public double getMinY() {
         return minY;
     }
@@ -22,13 +23,14 @@ public class BBox {
     }
 
 
-    // constructor
+    /**For solid collision objects like walls etc..*/
     public BBox(double minX, double maxX, double minY, double maxY) {
         this.minX = minX;
         this.maxX = maxX;
         this.minY = minY;
         this.maxY = maxY;
     }
+    /** **/
 
     /** @param other
      *  @return returns True if
@@ -64,6 +66,16 @@ public class BBox {
             if(maxX >= other.minX && minX <= other.maxX && maxY >= other.minY && minY <= other.maxY) {
                 return true;
             }
+        return false;
+    }
+
+    public static boolean checkBounds(double minX ,double  maxX,double minY ,double maxY){
+        for (BBox bBox : solidBBoxes)
+        {
+            if(maxX >= bBox.minX && minX <= bBox.maxX && maxY >= bBox.minY && minY <= bBox.maxY) {
+                return true;
+            }
+        }
         return false;
     }
 

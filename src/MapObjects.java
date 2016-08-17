@@ -9,8 +9,8 @@ public class MapObjects {
         /** creates a visual representation of collision objects , helper method to visualize bboxes**/
         public void drawMap(GraphicsContext g){
             for(int i = 0; i < BBox.dimension2Ds.size() ; i++){
-                double x = BBox.bBoxes.get(i).getMinX();
-                double y = BBox.bBoxes.get(i).getMinY();
+                double x = BBox.solidBBoxes.get(i).getMinX();
+                double y = BBox.solidBBoxes.get(i).getMinY();
                    double w = BBox.dimension2Ds.get(i).getWidth();
                    double h = BBox.dimension2Ds.get(i).getHeight();
                 g.setFill(Color.GRAY);

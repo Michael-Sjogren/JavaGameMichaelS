@@ -168,7 +168,7 @@ public class LoadMap {
                         int minX = mapObject.getX();
                         int minY = mapObject.getY();
                         BBox.dimension2Ds.add(new Dimension2D(width, height));
-                        BBox.bBoxes.add(new BBox(minX, minX + width, minY, minY + height));
+                        BBox.solidBBoxes.add(new BBox(minX, minX + width, minY, minY + height));
                     }
                     System.out.println("\n layerlist size :" + layersList.size() + "\n objectlist size : " + layersList.get(i).getObjectList().size() + "\n layer : " + i );
                 }

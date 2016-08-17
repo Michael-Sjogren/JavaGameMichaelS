@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by Michael-Sjogren on 2016-07-19.
@@ -16,13 +18,16 @@ public class KeyInput implements EventHandler<KeyEvent> {
     public static int LEFT = 0;
     public static int RIGHT = 0;
     private Timeline timeline;
-	private int xaxis;	
+    public static ArrayList<Projectile> projectiles = new ArrayList<>();
+	private int xaxis;
+
     public KeyInput(Entity player) {
         this.entity = player;
-        timeline = new Timeline(new KeyFrame(
-                Duration.millis(50), ae ->  entity.setIsJumpPressed(true)
 
-        ),new KeyFrame(Duration.millis(1), ae -> {
+        timeline = new Timeline(new KeyFrame(
+                Duration.millis(1), ae ->  entity.setIsJumpPressed(true)
+
+        ),new KeyFrame(Duration.millis(20), ae -> {
             entity.setIsJumpPressed(false);
         }));
     }
@@ -38,7 +43,13 @@ public class KeyInput implements EventHandler<KeyEvent> {
         {
             case A: LEFT = -1; break;
             case D: RIGHT = 1; break;
-            case SPACE:timeline.play(); break;
+            case W:timeline.play(); break;
+            case SPACE:
+                if (xaxis != 0)
+                {
+                    entity.createProjectile(xaxis);
+                }
+                break;
 		default:
 			break;
 
@@ -55,7 +66,7 @@ public class KeyInput implements EventHandler<KeyEvent> {
             default:
             	break;
         }
-        
+
 		entity.setXaxis(xaxis = LEFT + RIGHT);
     }
 

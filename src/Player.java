@@ -15,13 +15,8 @@ public class Player extends Entity{
     private double x;
     private int w;
     private int h;
-    private Movement movement;
-    private double gravity = 1;
     private boolean isOnGround = false;
-    public static final double velocityFall = 0.1 / 90 ;
-    public static final double velocityJump = 15;
     private double tempGrav = 0;
-    private boolean isJumpPressed;
     private Font f = new Font(16);
 
     public Player(int x , int y , int w , int h) {
@@ -30,20 +25,20 @@ public class Player extends Entity{
         this.y = y;
         this.w = w;
         this.h = h;
-        movement = new Movement(this);
         playerImage = new Image("images/sprite_player_badass_down1.png",32 * View.scale,32 * View.scale,true,false);
-        
     }
 
     public void draw(GraphicsContext g ){
+        super.draw(g);
         g.drawImage( playerImage , x - OFFSET_X * View.scale , y - OFFSET_Y * View.scale );
          g.setFill(Color.rgb(0,255,255 , 0.9));
-     //  representation of bounding box for player
+        //  representation of bounding box for player
         // g.fillRect(x,y,w,h);
-     // x , y coordinates of player
+
+         // x , y coordinates of player
         g.setFont(f);
         g.setStroke(Color.LIMEGREEN);
-        g.strokeText("X : " + Double.toString(getX()) + "\n" + "Y : "+ Double.toString(Math.round(getY())), 50 , 50 );
+        g.strokeText("X : " + Double.toString(getX()) + "\n" + "Y : "+ Double.toString(Math.round(getY())) + "\n" + "Entities: " + Integer.toString(Main.NUMBER_OF_INSTANCES), 50 , 50 );
     }
 
     public BBox BBox(){
@@ -76,21 +71,16 @@ public class Player extends Entity{
 
     @Override
     public void tick() {
-        movement.move();
+        super.tick();
     }
 
     @Override
     public void jump(){
-            tempGrav -= gravity + velocityJump;
-            setY(getY() + tempGrav);
-            if(tempGrav <= -10){
-                isJumpPressed = false;
-                setIsOnGround(false);
-            }
+        super.jump();
     }
 
     public void setTempGrav(double tempGrav){
-        this.tempGrav = tempGrav;
+        super.setTempGrav(tempGrav);
     }
 
     public double getTempGrav() {
@@ -98,7 +88,7 @@ public class Player extends Entity{
     }
 
     public void setIsJumpPressed(boolean jumpPressed) {
-        isJumpPressed = jumpPressed;
+        super.setIsJumpPressed(jumpPressed);
     }
 
     public boolean isOnGround(){
@@ -111,16 +101,7 @@ public class Player extends Entity{
     
     @Override
     public void gravity(){
-            if(!isOnGround()) {
-               tempGrav += gravity + velocityFall;
-                setY(getY() + tempGrav);
-                if(tempGrav >= 10){
-                    tempGrav = 10;
-                }
-            } if(isOnGround()){
-                tempGrav = 0;
-            } if(isOnGround() && isJumpPressed){
-                jump();
-            }
+         super.gravity();
         }
+
 }

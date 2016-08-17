@@ -6,7 +6,7 @@ public class Movement {
     public static final int SPEED = 2;
     private double prevX , prevY;
     private Entity entity;
-    private boolean regularCol , isOnGround = false;
+
 
     public Movement(Entity entity) {
         this.entity = entity;
@@ -18,20 +18,18 @@ public class Movement {
         prevY = entity.getY();
         // move object
         entity.setX(entity.getX() + entity.getXaxis() * SPEED);
-        regularCol = false;
+
         entity.setIsOnGround(false);
         entity.gravity();
 
-        BBox.bBoxes.stream().filter(box -> box.isOnGround(entity.BBox())).forEach(box -> {
-            isOnGround = true;
+        BBox.solidBBoxes.stream().filter(box -> box.isOnGround(entity.BBox())).forEach(box -> {
             entity.setIsOnGround(true);
             entity.gravity();
             entity.setY(prevY);
                 entity.setX(entity.getX() + entity.getXaxis() * SPEED);
         });
 
-        BBox.bBoxes.stream().filter(box -> box.isColliding(entity.BBox())).forEach(bBox -> {
-            regularCol = true;
+        BBox.solidBBoxes.stream().filter(box -> box.isColliding(entity.BBox())).forEach(bBox -> {
             entity.setIsOnGround(false);
             entity.setX(prevX);
 
@@ -50,7 +48,7 @@ public class Movement {
 
         });
 
-        BBox.bBoxes.stream().filter(box -> box.isCollidingBottom(entity.BBox())).forEach(bBox -> {
+        BBox.solidBBoxes.stream().filter(box -> box.isCollidingBottom(entity.BBox())).forEach(bBox -> {
             entity.setIsOnGround(false);
             entity.setTempGrav(0.6);
             entity.setY(prevY);
