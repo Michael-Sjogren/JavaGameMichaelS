@@ -14,7 +14,7 @@ Just a simple game made in javafx with rectangular collision detection and gravi
 
 ##### **D :   RIGHT**
 
-I've also been working on implementing code to read the save files from the program:  
+I've also have implemented code to read the save files from the program:  
 [Tiled](http://www.mapeditor.org/ "Tiled Map Editor")
 in Json format to generate tiles and collision objects.
 
