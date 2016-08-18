@@ -30,6 +30,7 @@ public class Entity {
     public final static int ENTITY_MAX_HP = 5;
     public int hp = ENTITY_MAX_HP;
     private boolean isAlive = true;
+    private boolean isFiring;
 
     public Entity(double x , double y , double w , double h) {
         this.x = x;
@@ -46,9 +47,12 @@ public class Entity {
         ),new KeyFrame(Duration.millis(21), ae -> {
             isEntityAlive();
         }));
+
+
     }
 
     public void draw(GraphicsContext g ){
+        checkInput();
         drawProjectiles(g);
         drawEntity(g);
         drawHealthBar(g);
@@ -56,9 +60,9 @@ public class Entity {
     }
     public void drawHealthBar(GraphicsContext g)
     {
-        g.setFill(Color.RED);
+        g.setFill(Color.CRIMSON);
         g.fillRect(x,y-10,3*ENTITY_MAX_HP,5);
-        g.setFill(Color.GREEN);
+        g.setFill(Color.LIMEGREEN);
         g.fillRect(x,y-10,3*hp,5);
 
     }
@@ -218,5 +222,15 @@ public class Entity {
 
     public Timeline getTl_damagePlayer() {
         return tl_damagePlayer;
+    }
+
+    public void checkInput(){
+        if(isFiring){
+            createProjectile(xaxis,this);
+        }
+    }
+
+    public void isFiring(boolean b) {
+        isFiring = b;
     }
 }

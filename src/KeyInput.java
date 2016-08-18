@@ -43,13 +43,13 @@ public class KeyInput implements EventHandler<KeyEvent> {
         {
             case A: LEFT = -1; prevXaxis = -1; break;
             case D: RIGHT = 1; prevXaxis = 1; break;
-            case W:timeline.play(); break;
-            case SPACE: entity.createProjectile(prevXaxis , entity); break;
+            case W: timeline.play();break;
+            case SPACE: break;
 		default:
 			break;
 
         }
-        
+
 		entity.setXaxis( xaxis = LEFT + RIGHT);
     }
 
@@ -58,10 +58,11 @@ public class KeyInput implements EventHandler<KeyEvent> {
         {
             case A: LEFT = 0; break;
             case D: RIGHT = 0; break;
+            case W: timeline.stop();break;
+            case SPACE:entity.createProjectile(prevXaxis,entity);break;
             default:
             	break;
         }
-
 		entity.setXaxis(xaxis = LEFT + RIGHT);
     }
 

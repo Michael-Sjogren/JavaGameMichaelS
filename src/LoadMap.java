@@ -21,7 +21,6 @@ import java.util.Scanner;
 public class LoadMap {
     private Gson gson = new Gson();
     private StringBuilder sb;
-    private Scanner sc = null;
     private JsonObject json_obj;
     public static int map_cell_width, map_cell_height;
 
@@ -44,15 +43,15 @@ public class LoadMap {
      * reads the json data from a file and concatenates it into string witch is later turned into a json object
      **/
     public void loadJsonData() {
-        try {
-            InputStream is = LoadMap.class.getResourceAsStream("/maps/2dMap.json");
+        try(InputStream is = LoadMap.class.getResourceAsStream("/maps/2dMap.json")) {
 
-            sc = new Scanner(new BufferedReader(new InputStreamReader(is)));
+            Scanner sc = new Scanner(new BufferedReader(new InputStreamReader(is)));
             sb = new StringBuilder();
 
             while (sc.hasNextLine()) {
                 sb.append(sc.next());
             }
+            sc.close();
 
             JsonArray layers , tilesets , object;
 
@@ -87,8 +86,6 @@ public class LoadMap {
 
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            sc.close();
         }
     }
 
