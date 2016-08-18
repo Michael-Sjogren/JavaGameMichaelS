@@ -46,7 +46,15 @@ public class Entity {
     }
     public void draw(GraphicsContext g ){
         drawProjectiles(g);
+        drawEntity(g);
 
+    }
+
+    public void drawEntity(GraphicsContext g){
+        if(isAlive){
+            g.setFill(Color.TEAL);
+            g.fillRect(x,y,w,h);
+        }
     }
 
     public void drawProjectiles(GraphicsContext g)
