@@ -38,12 +38,10 @@ public class View extends Canvas{
             }
         };
 
-    private Entity entity;
 	private Canvas middleGround;
 	private GraphicsContext g3;
 
-    public View(Entity entity, MapObjects map, LoadMap l ) {
-        this.entity = entity;
+    public View(MapObjects map, LoadMap l ) {
         this.map = map;
         this.l = l;
         createForegroundCanvas();
@@ -93,7 +91,7 @@ public class View extends Canvas{
         g3.clearRect(0, 0 , WIDTH , HEIGHT);
         g.clearRect(0,0,WIDTH,HEIGHT);
         // TODO create a sense of depth , foreground , entity , background
-       Entity.entities.stream().forEach(e -> e.draw(g3));
+        Entity.entities.stream().forEach(e -> e.draw(g3));
 
 
        
