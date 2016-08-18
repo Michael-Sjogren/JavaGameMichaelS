@@ -18,7 +18,7 @@ public class KeyInput implements EventHandler<KeyEvent> {
     public static int LEFT = 0;
     public static int RIGHT = 0;
     private Timeline timeline;
-    public static ArrayList<Projectile> projectiles = new ArrayList<>();
+
 	private int xaxis;
 
     public KeyInput(Entity player) {
@@ -47,7 +47,7 @@ public class KeyInput implements EventHandler<KeyEvent> {
             case SPACE:
                 if (xaxis != 0)
                 {
-                    entity.createProjectile(xaxis);
+                    entity.createProjectile(xaxis , entity);
                 }
                 break;
 		default:

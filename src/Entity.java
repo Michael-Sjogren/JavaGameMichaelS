@@ -45,16 +45,17 @@ public class Entity {
         }));
     }
     public void draw(GraphicsContext g ){
+        drawProjectiles(g);
+
+    }
+
+    public void drawProjectiles(GraphicsContext g)
+    {
         if(!projectiles.isEmpty()){
             for (Projectile p :projectiles) {
                 p.draw(g);
             }
         }
-        if(isAlive){
-            g.setFill(Color.TEAL);
-            g.fillRect(x,y,w,h);
-        }
-
     }
 
     public void moveProjectiles(){
@@ -162,8 +163,8 @@ public class Entity {
     }
 
 
-    public void createProjectile(int xaxis) {
-        projectiles.add(new Projectile( getX(),getY(), xaxis, this));
+    public void createProjectile(int xaxis , Entity entity) {
+        projectiles.add(new Projectile( getX(),getY(), xaxis, entity));
         Iterator<Projectile> iter = projectiles.iterator();
 
         while (iter.hasNext()) {

@@ -37,17 +37,24 @@ public class Player extends Entity{
     @Override
     public void draw(GraphicsContext g) {
         // x , y coordinates of player
-        ;
+        drawProjectiles(g);
         g.setFont(f);
         g.setStroke(Color.LIMEGREEN);
         g.strokeText("X : " + Double.toString(getX()) + "\n" + "Y : "+ Double.toString(Math.round(getY())) + "\n" + "Entities: " + Integer.toString(Main.NUMBER_OF_INSTANCES), 50 , 50 );
+        // draw player
         g.setFill(playerColor);
         g.fillRect(getX(),getY(),getW(),getH());
+
     }
 
     @Override
     public void moveProjectiles() {
         super.moveProjectiles();
+    }
+
+    @Override
+    public void drawProjectiles(GraphicsContext g) {
+        super.drawProjectiles(g);
     }
 
     @Override
@@ -141,8 +148,8 @@ public class Player extends Entity{
     }
 
     @Override
-    public void createProjectile(int xaxis) {
-        super.createProjectile(xaxis);
+    public void createProjectile(int xaxis , Entity entiy) {
+        super.createProjectile(xaxis , entiy);
     }
 
     @Override
