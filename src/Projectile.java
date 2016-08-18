@@ -51,8 +51,8 @@ public class Projectile  {
 
    public void draw(GraphicsContext g){
        if(!isOutOfBounds){
-           g.setFill(Color.RED);
-           g.fillRect(getX(),getY(),BULLET_WIDTH,BULLET_HEIGHT);
+           g.setFill(Color.DARKGOLDENROD);
+           g.fillOval(getX(),getY(),BULLET_WIDTH,BULLET_HEIGHT);
        }else {
            return;
        }
