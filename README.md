@@ -1,4 +1,4 @@
-# JavaFX-2d-game
+# Java-game
 
 ### A javafx 2d game with basic platforming aspects.
 
