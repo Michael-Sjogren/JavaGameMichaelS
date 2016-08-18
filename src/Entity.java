@@ -1,4 +1,8 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,6 +12,7 @@ import java.util.Iterator;
  */
 public class Entity {
 
+    private Timeline tl_damagePlayer;
     private Movement movement;
     private double x;
     private double y;
@@ -16,13 +21,13 @@ public class Entity {
     private int xaxis;
     private boolean isOnGround , isJumpPressed;
     private double tempGrav = 0;
-    private Projectile projectile;
     private double gravity = 1;
     public static ArrayList<Projectile> projectiles = new ArrayList<>();
     public static ArrayList<Entity> entities = new ArrayList<>();
     public static final double velocityFall = 0.1 / 90 ;
     public static final double velocityJump = 15;
-
+    public static int ENTITY_HP = 5;
+    private boolean isAlive = true;
 
     public Entity(double x , double y , double w , double h) {
         this.x = x;
@@ -31,7 +36,13 @@ public class Entity {
         this.h = h;
         movement = new Movement(this);
         entities.add(this);
-        Main.NUMBER_OF_INSTANCES = projectiles.size() + entities.size();
+
+        tl_damagePlayer = new Timeline(new KeyFrame(
+                Duration.millis(200), ae ->  damage()
+
+        ),new KeyFrame(Duration.millis(300), ae -> {
+            isEntityAlive();
+        }));
     }
     public void draw(GraphicsContext g ){
         if(!projectiles.isEmpty()){
@@ -39,13 +50,16 @@ public class Entity {
                 p.draw(g);
             }
         }
+        if(isAlive){
+            g.setFill(Color.TEAL);
+            g.fillRect(x,y,w,h);
+        }
+
     }
 
     public void moveProjectiles(){
         if(!projectiles.isEmpty()){
-            for (Projectile p :projectiles) {
-                p.tick();
-            }
+            projectiles.forEach(Projectile::tick);
         }
     }
 
@@ -55,9 +69,17 @@ public class Entity {
         movement.move();
     }
 
-    public Movement getMovement() {
-        return movement;
+    public void isEntityAlive(){
+
+        Iterator<Entity> iter = entities.iterator();
+        while (iter.hasNext()) {
+            Entity e = iter.next();
+            if (this == e && !e.isAlive()){
+                iter.remove();
+            }
+        }
     }
+
 
     public BBox BBox(){
         return new BBox(x,x+w,y,y+h);
@@ -140,9 +162,8 @@ public class Entity {
     }
 
 
-    public synchronized void createProjectile(int xaxis) {
-            projectiles.add(new Projectile( getX(),getY(), xaxis));
-
+    public void createProjectile(int xaxis) {
+        projectiles.add(new Projectile( getX(),getY(), xaxis, this));
         Iterator<Projectile> iter = projectiles.iterator();
 
         while (iter.hasNext()) {
@@ -152,5 +173,25 @@ public class Entity {
                 iter.remove();
             }
         }
+    }
+
+    public void damage() {
+        ENTITY_HP --;
+        System.out.println("Entity hp: " + ENTITY_HP);
+        if(ENTITY_HP == 0){
+            setIsAlive(false);
+        }
+    }
+
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public Timeline getTl_damagePlayer() {
+        return tl_damagePlayer;
     }
 }

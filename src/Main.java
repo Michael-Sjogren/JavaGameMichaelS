@@ -2,6 +2,7 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application  {
@@ -17,7 +18,9 @@ public class Main extends Application  {
 
     @Override
     public void start(Stage stage) {
-        entity = new Player(600 ,50 , 6 * View.scale , 14 * View.scale);
+        entity = new Player(600 ,50 , 6 * View.scale , 14 * View.scale, Color.RED);
+        Entity e1 = new Entity(300,400,6*View.scale, 14 * View.scale);
+
         keyInput = new KeyInput(entity);
         map = new MapObjects();
         LoadMap l = new LoadMap();

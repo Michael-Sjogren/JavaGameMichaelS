@@ -7,23 +7,24 @@ import java.util.ArrayList;
  */
 public class BBox {
 
-    public double getMinX() {
-        return minX;
-    }
+
     public static ArrayList<BBox> solidBBoxes = new ArrayList<>();
     public static ArrayList<Dimension2D> dimension2Ds = new ArrayList<>();
-    public static ArrayList<BBox> projectileBBoxes = new ArrayList<>();
+
+    private double minX , maxX , minY , maxY;
+
     public double getMinY() {
         return minY;
     }
-    private double minX , maxX , minY , maxY;
-
+    public double getMinX() {
+        return minX;
+    }
     public double getMaxX() {
         return maxX;
     }
+    public double getMaxY() { return maxY; }
 
-
-    /**For solid collision objects like walls etc..*/
+    /** For non moving collision objects like walls etc..*/
     public BBox(double minX, double maxX, double minY, double maxY) {
         this.minX = minX;
         this.maxX = maxX;
@@ -38,9 +39,9 @@ public class BBox {
      *  if it does this returns true
      * **/
     public boolean isOnGround(BBox other){
-            if(maxX >= other.minX && minX  <= other.maxX
-               && minY  >= other.minY // maxY is minY + 1
-                && minY <= other.maxY) {
+            if(maxX >= other.getMinX() && minX  <= other.getMaxX()
+               && minY  >= other.getMinY() // maxY is minY + 1
+                && minY <= other.getMaxY()) {
                 return true;
             }
         return false;
@@ -52,9 +53,9 @@ public class BBox {
      *  if it does this returns true else false
      * **/
     public boolean isCollidingBottom(BBox other){
-        if(maxX - 1>= other.minX && minX +1 <= other.maxX
-                && maxY >= other.minY // maxY is minY + 1
-                && maxY <= other.maxY) {
+        if(maxX - 1>= other.getMinX() && minX +1 <= other.getMaxX()
+                && maxY >= other.getMinY() // maxY is minY + 1
+                && maxY <= other.getMaxY()) {
           //  System.out.println("roof");
             return true;
         }
@@ -63,21 +64,39 @@ public class BBox {
 
 
     public boolean isColliding(BBox other){
-            if(maxX >= other.minX && minX <= other.maxX && maxY >= other.minY && minY <= other.maxY) {
+            if(maxX >= other.getMinX() && minX <= other.getMaxX() && maxY >= other.getMinY() && minY <= other.getMaxY()) {
                 return true;
             }
         return false;
     }
 
-    public static boolean checkBounds(double minX ,double  maxX,double minY ,double maxY){
+    /** for moving collision objects such as bullets and other things**/
+    public static boolean checkProjectileCollision(double minX, double maxX, double minY, double maxY, Entity entity){
         for (BBox bBox : solidBBoxes)
         {
-            if(maxX >= bBox.minX && minX <= bBox.maxX && maxY >= bBox.minY && minY <= bBox.maxY) {
+            if(maxX >= bBox.getMinX() && minX <= bBox.getMaxX() && maxY >= bBox.getMinY() && minY <= bBox.getMaxY()) {
                 return true;
+            }
+        }
+
+        for (Entity e : Entity.entities)
+        {
+            double eMinX = e.getX();
+            double eMaxX = e.getX() + e.getW();
+            double eMinY = e.getY();
+            double eMaxY = e.getY() + e.getH();
+
+            if(e != entity){
+                if(maxX >= eMinX && minX <= eMaxX && maxY >= eMinY && minY <= eMaxY ) {
+                    e.getTl_damagePlayer().play();
+                    return true;
+                }
             }
         }
         return false;
     }
+
+
 
 
 

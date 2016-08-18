@@ -13,11 +13,13 @@ public class Projectile  {
     private boolean isOutOfBounds = false;
     private double x , y ;
     private int xaxis;
+    private Entity entity;
 
-    public Projectile(double x, double y, int xaxis) {
+    public Projectile(double x, double y, int xaxis, Entity entity) {
         this.x = x;
         this.y = y;
         this.xaxis = xaxis;
+        this.entity = entity;
     }
 
 
@@ -27,7 +29,7 @@ public class Projectile  {
         // if its inside the screen render and move the bullet
 
            setX(getX() + PROJECTILE_SPEED * getXaxis());
-           if(BBox.checkBounds(x,x+BULLET_WIDTH,y,y+BULLET_HEIGHT))
+           if(BBox.checkProjectileCollision(x,x+BULLET_WIDTH,y,y+BULLET_HEIGHT , entity))
            {
                isOutOfBounds = true;
            }
@@ -38,7 +40,7 @@ public class Projectile  {
    public void draw(GraphicsContext g){
        if(!isOutOfBounds){
            g.setFill(Color.RED);
-           g.fillOval(getX(),getY(),BULLET_WIDTH,BULLET_HEIGHT);
+           g.fillRect(getX(),getY(),BULLET_WIDTH,BULLET_HEIGHT);
        }else {
            return;
        }
