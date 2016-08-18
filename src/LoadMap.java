@@ -126,12 +126,10 @@ public class LoadMap {
         for (Layer layer : layersList){
             layerData = new int[map_cell_width][map_cell_height];
                 for (int row = 0; row < map_cell_width ; row++) {
-                    System.out.println(" ------------------------ " + itr);
                     for (int col = 0; col < map_cell_height ; col++) {
                         // fill a 2d array that hold all the tilesetImage values
                         if (!layer.getData().isEmpty()) {
                             layerData[row][col] = layer.getData().get(itr);
-                            System.out.print(layerData[row][col] + " ");
                             layerDataList.add(layerData);
                             itr++;
                         }
@@ -170,7 +168,6 @@ public class LoadMap {
                         BBox.dimension2Ds.add(new Dimension2D(width, height));
                         BBox.solidBBoxes.add(new BBox(minX, minX + width, minY, minY + height));
                     }
-                    System.out.println("\n layerlist size :" + layersList.size() + "\n objectlist size : " + layersList.get(i).getObjectList().size() + "\n layer : " + i );
                 }
             }
     }

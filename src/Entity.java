@@ -12,6 +12,7 @@ import java.util.Iterator;
  */
 public class Entity {
 
+    // delay on the damage since the collision detects too quickly
     private Timeline tl_damagePlayer;
     private Movement movement;
     private double x;
@@ -36,6 +37,7 @@ public class Entity {
         this.h = h;
         movement = new Movement(this);
         entities.add(this);
+        Main.NUMBER_OF_INSTANCES++;
 
         tl_damagePlayer = new Timeline(new KeyFrame(
                 Duration.millis(200), ae ->  damage()
@@ -44,6 +46,7 @@ public class Entity {
             isEntityAlive();
         }));
     }
+
     public void draw(GraphicsContext g ){
         drawProjectiles(g);
         drawEntity(g);
@@ -173,13 +176,15 @@ public class Entity {
 
     public void createProjectile(int xaxis , Entity entity) {
         projectiles.add(new Projectile( getX(),getY(), xaxis, entity));
+        Main.NUMBER_OF_INSTANCES++;
+        // checks if projectile is out of bounds , if it is it will removed the object from the list.
         Iterator<Projectile> iter = projectiles.iterator();
-
         while (iter.hasNext()) {
             Projectile p = iter.next();
             if (p.isOutOfBounds()){
                 System.out.println(projectiles.size());
                 iter.remove();
+                Main.NUMBER_OF_INSTANCES--;
             }
         }
     }
@@ -189,6 +194,7 @@ public class Entity {
         System.out.println("Entity hp: " + ENTITY_HP);
         if(ENTITY_HP == 0){
             setIsAlive(false);
+            Main.NUMBER_OF_INSTANCES--;
         }
     }
 
