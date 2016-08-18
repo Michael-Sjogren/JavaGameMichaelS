@@ -1,5 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Material;
 
 
 /**
@@ -14,16 +15,28 @@ public class Projectile  {
     private double x , y ;
     private int xaxis;
     private Entity entity;
+    private double right;
 
     public Projectile(double x, double y, int xaxis, Entity entity) {
-        this.x = x;
-        this.y = y;
+        this.y = y + entity.getH()/2;
+        getBulletStartPos(x);
         this.xaxis = xaxis;
         this.entity = entity;
     }
 
 
+    public void getBulletStartPos(double x){
 
+        if(xaxis == 1)
+        {
+            this.x = x + entity.getW();
+        }
+        else
+        {
+            this.x = x;
+        }
+
+    }
     /** makes bullet travel**/
     public void tick(){
         // if its inside the screen render and move the bullet

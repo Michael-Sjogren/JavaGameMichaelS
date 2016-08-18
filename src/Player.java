@@ -12,6 +12,7 @@ import java.util.Iterator;
 public class Player extends Entity{
 
     private final Color playerColor;
+
     private Image playerImage;
     public static final int OFFSET_X = 13;
     public static final int OFFSET_Y = 11;

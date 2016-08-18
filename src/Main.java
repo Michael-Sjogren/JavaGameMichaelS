@@ -34,7 +34,7 @@ public class Main extends Application  {
         // adding event handler
         stage.addEventHandler(KeyEvent.ANY ,keyInput);
 
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
 
     }
