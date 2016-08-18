@@ -24,7 +24,7 @@ public class Main extends Application  {
         keyInput = new KeyInput(entity);
         map = new MapObjects();
         LoadMap l = new LoadMap();
-        view = new View(entity , map , l);
+        view = new View(map , l);
         l.createCollisionObjects();
         l.loadTilesetImages();
         stage.setScene(new Scene(view.createContent()));
