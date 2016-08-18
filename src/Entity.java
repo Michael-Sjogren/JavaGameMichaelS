@@ -27,7 +27,8 @@ public class Entity {
     public static ArrayList<Entity> entities = new ArrayList<>();
     public static final double velocityFall = 0.1 / 90 ;
     public static final double velocityJump = 15;
-    public static int ENTITY_HP = 5;
+    public final static int ENTITY_MAX_HP = 5;
+    public int hp = ENTITY_MAX_HP;
     private boolean isAlive = true;
 
     public Entity(double x , double y , double w , double h) {
@@ -40,9 +41,9 @@ public class Entity {
         Main.NUMBER_OF_INSTANCES++;
 
         tl_damagePlayer = new Timeline(new KeyFrame(
-                Duration.millis(200), ae ->  damage()
+                Duration.millis(20), ae ->  damage()
 
-        ),new KeyFrame(Duration.millis(300), ae -> {
+        ),new KeyFrame(Duration.millis(21), ae -> {
             isEntityAlive();
         }));
     }
@@ -50,6 +51,15 @@ public class Entity {
     public void draw(GraphicsContext g ){
         drawProjectiles(g);
         drawEntity(g);
+        drawHealthBar(g);
+
+    }
+    public void drawHealthBar(GraphicsContext g)
+    {
+        g.setFill(Color.RED);
+        g.fillRect(x,y-10,3*ENTITY_MAX_HP,5);
+        g.setFill(Color.GREEN);
+        g.fillRect(x,y-10,3*hp,5);
 
     }
 
@@ -190,9 +200,9 @@ public class Entity {
     }
 
     public void damage() {
-        ENTITY_HP --;
-        System.out.println("Entity hp: " + ENTITY_HP);
-        if(ENTITY_HP == 0){
+        hp --;
+        System.out.println("Entity hp: " + hp);
+        if(hp == 0){
             setIsAlive(false);
             Main.NUMBER_OF_INSTANCES--;
         }

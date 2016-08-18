@@ -17,7 +17,6 @@ public class View extends Canvas{
     public static final int HEIGHT = 896;
 
     public static Pane root;
-    private MapObjects map;
     private LoadMap l;
     private Canvas foregroundCanvas , backgroundCanvas;
     private GraphicsContext g , g2;
@@ -41,8 +40,7 @@ public class View extends Canvas{
 	private Canvas middleGround;
 	private GraphicsContext g3;
 
-    public View(MapObjects map, LoadMap l ) {
-        this.map = map;
+    public View(LoadMap l ) {
         this.l = l;
         createForegroundCanvas();
         createBackgroundCanvas();
@@ -90,11 +88,8 @@ public class View extends Canvas{
    public void render(){
         g3.clearRect(0, 0 , WIDTH , HEIGHT);
         g.clearRect(0,0,WIDTH,HEIGHT);
-        // TODO create a sense of depth , foreground , entity , background
         Entity.entities.stream().forEach(e -> e.draw(g3));
 
-
-       
     }
 }
 

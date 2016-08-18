@@ -45,7 +45,12 @@ public class Player extends Entity{
         // draw player
         g.setFill(playerColor);
         g.fillRect(getX(),getY(),getW(),getH());
+        drawHealthBar(g);
+    }
 
+    @Override
+    public void drawHealthBar(GraphicsContext g){
+        super.drawHealthBar(g);
     }
 
     @Override

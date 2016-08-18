@@ -10,7 +10,7 @@ public class Main extends Application  {
     private View view;
     private Entity entity;
     private KeyInput keyInput;
-    private MapObjects map;
+   // private MapObjects map;
     public static int NUMBER_OF_INSTANCES = 0;
     public static void main(String[] args) {
         launch(args);
@@ -22,9 +22,9 @@ public class Main extends Application  {
         Entity e1 = new Entity(300,400,6*View.scale, 14 * View.scale);
 
         keyInput = new KeyInput(entity);
-        map = new MapObjects();
+       // map = new MapObjects();
         LoadMap l = new LoadMap();
-        view = new View(map , l);
+        view = new View(l);
         l.createCollisionObjects();
         l.loadTilesetImages();
         stage.setScene(new Scene(view.createContent()));

@@ -72,6 +72,7 @@ public class BBox {
 
     /** for moving collision objects such as bullets and other things**/
     public static boolean checkProjectileCollision(double minX, double maxX, double minY, double maxY, Entity entity){
+        // checks for solids
         for (BBox bBox : solidBBoxes)
         {
             if(maxX >= bBox.getMinX() && minX <= bBox.getMaxX() && maxY >= bBox.getMinY() && minY <= bBox.getMaxY()) {
@@ -79,6 +80,7 @@ public class BBox {
             }
         }
 
+        // checks for entities
         for (Entity e : Entity.entities)
         {
             double eMinX = e.getX();
@@ -86,8 +88,11 @@ public class BBox {
             double eMinY = e.getY();
             double eMaxY = e.getY() + e.getH();
 
+            // entity that shoots cannot hurt itself
             if(e != entity){
                 if(maxX >= eMinX && minX <= eMaxX && maxY >= eMinY && minY <= eMaxY ) {
+                    // timeline , timeline for some short invincibility frames.
+                    // this timeline calls damage() and checks if entity is dead.
                     e.getTl_damagePlayer().play();
                     return true;
                 }
@@ -95,9 +100,5 @@ public class BBox {
         }
         return false;
     }
-
-
-
-
 
 }
