@@ -19,7 +19,7 @@ public class KeyInput implements EventHandler<KeyEvent> {
     public static int RIGHT = 0;
     private Timeline timeline;
 
-	private int xaxis;
+	private int xaxis , prevXaxis;
 
     public KeyInput(Entity player) {
         this.entity = player;
@@ -41,15 +41,10 @@ public class KeyInput implements EventHandler<KeyEvent> {
 
         switch (event.getCode())
         {
-            case A: LEFT = -1; break;
-            case D: RIGHT = 1; break;
+            case A: LEFT = -1; prevXaxis = -1; break;
+            case D: RIGHT = 1; prevXaxis = 1; break;
             case W:timeline.play(); break;
-            case SPACE:
-                if (xaxis != 0)
-                {
-                    entity.createProjectile(xaxis , entity);
-                }
-                break;
+            case SPACE: entity.createProjectile(prevXaxis , entity); break;
 		default:
 			break;
 
