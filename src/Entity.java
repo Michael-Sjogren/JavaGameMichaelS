@@ -107,7 +107,7 @@ public class Entity {
 
     public void animateSelf(GraphicsContext g){
       
-        if(xaxis == RIGHT && isOnGround){
+        if(xaxis == RIGHT ){
             g.drawImage(spritesRight[imageIndex] , x - 39  , y - 32);
         }
         
@@ -116,7 +116,7 @@ public class Entity {
             g.drawImage(spritesRight[0] , x - 39  , y - 32);
         }
 
-        if(xaxis == LEFT && isOnGround){
+        if(xaxis == LEFT ){
             g.drawImage(spritesLeft[imageIndex] , x - 39  , y - 32);
         }
 
@@ -124,14 +124,7 @@ public class Entity {
 
             g.drawImage(spritesLeft[0] , x - 39  , y - 32);
         }
-        if(!isOnGround && xaxis == LEFT){
 
-            g.drawImage(spritesLeft[0] , x - 39  , y - 32);
-        }
-        if(!isOnGround && xaxis == RIGHT){
-
-            g.drawImage(spritesRight[0] , x - 39  , y - 32);
-        }
 
     }
 
