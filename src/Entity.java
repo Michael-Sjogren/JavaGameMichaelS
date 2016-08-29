@@ -90,7 +90,7 @@ public class Entity {
     }
     public void drawHealthBar(GraphicsContext g)
     {
-
+        // TODO make constants for these offsets
         g.setFill(Color.CRIMSON);
         g.fillRect(x  ,y-spritesRight[0].getHeight()/2,3*ENTITY_MAX_HP,5);
         g.setFill(Color.LIMEGREEN);
@@ -106,7 +106,7 @@ public class Entity {
     }
 
     public void animateSelf(GraphicsContext g){
-      
+      // TODO make constants for these offsets
         if(xaxis == RIGHT ){
             g.drawImage(spritesRight[imageIndex] , x - 39  , y - 32);
         }
