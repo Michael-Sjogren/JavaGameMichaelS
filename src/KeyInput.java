@@ -41,8 +41,8 @@ public class KeyInput implements EventHandler<KeyEvent> {
 
         switch (event.getCode())
         {
-            case A: LEFT = -1; prevXaxis = -1; break;
-            case D: RIGHT = 1; prevXaxis = 1; break;
+            case A: LEFT = -1; entity.setPrevXaxis(-1); break;
+            case D: RIGHT = 1; entity.setPrevXaxis(1); break;
             case W: timeline.play();break;
             case SPACE: break;
 		default:
@@ -59,7 +59,7 @@ public class KeyInput implements EventHandler<KeyEvent> {
             case A: LEFT = 0; break;
             case D: RIGHT = 0; break;
             case W: timeline.stop();break;
-            case SPACE:entity.createProjectile(prevXaxis,entity);break;
+            case SPACE:entity.createProjectile(entity.getPrevXaxis(),entity);break;
             default:
             	break;
         }
@@ -71,7 +71,6 @@ public class KeyInput implements EventHandler<KeyEvent> {
     public void handle(KeyEvent event) {
         checkInput(event);
     }
-
 
 
 

@@ -1,6 +1,9 @@
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -12,8 +15,10 @@ import java.util.Iterator;
  */
 public class Entity {
 
+    public static ImageView playerRight;
     // delay on the damage since the collision detects too quickly
-    private Timeline tl_damagePlayer;
+    private Timeline tl_damageEntity;
+    private Timeline tl_animateEntity;
     private Movement movement;
     private double x;
     private double y;
@@ -25,12 +30,25 @@ public class Entity {
     private double gravity = 1;
     public static ArrayList<Projectile> projectiles = new ArrayList<>();
     public static ArrayList<Entity> entities = new ArrayList<>();
-    public static final double velocityFall = 0.1 / 90 ;
-    public static final double velocityJump = 15;
-    public final static int ENTITY_MAX_HP = 5;
-    public int hp = ENTITY_MAX_HP;
+    private static final double velocityFall = 0.1 / 90 ;
+    private static final double velocityJump = 15;
+    private final static int ENTITY_MAX_HP = 5;
+    private int hp = ENTITY_MAX_HP;
+    private double offsetX = 0;
+    private double offsetY = 0;
     private boolean isAlive = true;
-    private boolean isFiring;
+    private Image[] spritesRight;
+    private Image[] spritesLeft;
+    private int index = 0;
+    private Animation animation;
+
+    public static final int LEFT = -1;
+    public static final int RIGHT = 1;
+    public static final int IDLE = 0;
+
+    private GraphicsContext g;
+    private int imageIndex;
+    private int prevXaxis = 1;
 
     public Entity(double x , double y , double w , double h) {
         this.x = x;
@@ -38,40 +56,83 @@ public class Entity {
         this.w = w;
         this.h = h;
         movement = new Movement(this);
+
         entities.add(this);
         Main.NUMBER_OF_INSTANCES++;
 
-        tl_damagePlayer = new Timeline(new KeyFrame(
-                Duration.millis(20), ae ->  damage()
+        tl_damageEntity = new Timeline(new KeyFrame(
+                Duration.millis(20), ae -> damage()
 
-        ),new KeyFrame(Duration.millis(21), ae -> {
+        ), new KeyFrame(Duration.millis(21), ae -> {
             isEntityAlive();
         }));
 
+       Image right = new Image("Images/sprite-enemy-right-sheet.png" , (32 * 8) * View.scale  , 32 * View.scale ,true , false);
+       Image left = new Image("Images/sprite-enemy-left1-sheet.png", (32 * 8) * View.scale  , 32 * View.scale ,true , false);
+
+        SpriteSheetCrop sprCrop = new SpriteSheetCrop();
+        int colums = 8;
+        spritesRight = sprCrop.cropSpriteSheet(right,colums, (int) right.getWidth() / colums,(int) right.getHeight());
+        spritesLeft = sprCrop.cropSpriteSheet(left,colums, (int) left.getWidth() / colums,(int) left.getHeight());
+
+        animation = new SpriteAnimation(Duration.millis(750),8,8 , this);
+        animation.setCycleCount(Animation.INDEFINITE);
+        animation.play();
 
     }
 
     public void draw(GraphicsContext g ){
-        checkInput();
         drawProjectiles(g);
         drawEntity(g);
         drawHealthBar(g);
 
+
     }
     public void drawHealthBar(GraphicsContext g)
     {
+
         g.setFill(Color.CRIMSON);
-        g.fillRect(x,y-10,3*ENTITY_MAX_HP,5);
+        g.fillRect(x  ,y-spritesRight[0].getHeight()/2,3*ENTITY_MAX_HP,5);
         g.setFill(Color.LIMEGREEN);
-        g.fillRect(x,y-10,3*hp,5);
+        g.fillRect(x , y-spritesRight[0].getHeight()/2,3*hp,5);
 
     }
 
     public void drawEntity(GraphicsContext g){
+
         if(isAlive){
-            g.setFill(Color.TEAL);
-            g.fillRect(x,y,w,h);
+           animateSelf(g);
         }
+    }
+
+    public void animateSelf(GraphicsContext g){
+      
+        if(xaxis == RIGHT && isOnGround){
+            g.drawImage(spritesRight[imageIndex] , x - 39  , y - 32);
+        }
+        
+        if(xaxis == IDLE && prevXaxis == RIGHT){
+
+            g.drawImage(spritesRight[0] , x - 39  , y - 32);
+        }
+
+        if(xaxis == LEFT && isOnGround){
+            g.drawImage(spritesLeft[imageIndex] , x - 39  , y - 32);
+        }
+
+        if(xaxis == IDLE && prevXaxis == LEFT ){
+
+            g.drawImage(spritesLeft[0] , x - 39  , y - 32);
+        }
+        if(!isOnGround && xaxis == LEFT){
+
+            g.drawImage(spritesLeft[0] , x - 39  , y - 32);
+        }
+        if(!isOnGround && xaxis == RIGHT){
+
+            g.drawImage(spritesRight[0] , x - 39  , y - 32);
+        }
+
     }
 
     public void drawProjectiles(GraphicsContext g)
@@ -196,7 +257,6 @@ public class Entity {
         while (iter.hasNext()) {
             Projectile p = iter.next();
             if (p.isOutOfBounds()){
-                System.out.println(projectiles.size());
                 iter.remove();
                 Main.NUMBER_OF_INSTANCES--;
             }
@@ -221,16 +281,18 @@ public class Entity {
     }
 
     public Timeline getTl_damagePlayer() {
-        return tl_damagePlayer;
+        return tl_damageEntity;
     }
 
-    public void checkInput(){
-        if(isFiring){
-            createProjectile(xaxis,this);
-        }
+    public void setImageIndex(int imageIndex) {
+        this.imageIndex = imageIndex;
     }
 
-    public void isFiring(boolean b) {
-        isFiring = b;
+    public void setPrevXaxis(int prevXaxis) {
+        this.prevXaxis = prevXaxis;
+    }
+
+    public int getPrevXaxis() {
+        return prevXaxis;
     }
 }

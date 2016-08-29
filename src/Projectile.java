@@ -15,17 +15,16 @@ public class Projectile  {
     private double x , y ;
     private int xaxis;
     private Entity entity;
-    private double right;
 
     public Projectile(double x, double y, int xaxis, Entity entity) {
-        this.y = y + entity.getH()/2;
-        getBulletStartPos(x);
+        this.y = y + entity.getH()/2 - 10;
+        setBulletStartPos(x);
         this.xaxis = xaxis;
         this.entity = entity;
     }
 
 
-    public void getBulletStartPos(double x){
+    public void setBulletStartPos(double x){
 
         if(xaxis == 1)
         {
@@ -37,10 +36,10 @@ public class Projectile  {
         }
 
     }
+
     /** makes bullet travel**/
     public void tick(){
         // if its inside the screen render and move the bullet
-
            setX(getX() + PROJECTILE_SPEED * getXaxis());
            if(BBox.checkProjectileCollision(x,x+BULLET_WIDTH,y,y+BULLET_HEIGHT , entity))
            {
@@ -79,6 +78,7 @@ public class Projectile  {
     public void setY(double y) {
        this.y = y;
     }
+
     public int getXaxis() {
         return xaxis;
     }

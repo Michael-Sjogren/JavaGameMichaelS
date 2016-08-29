@@ -1,8 +1,12 @@
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 import java.util.Iterator;
 
@@ -12,10 +16,10 @@ import java.util.Iterator;
 public class Player extends Entity{
 
     private final Color playerColor;
+    private final Image[] spriteSheet = new Image[5];
+    private Timeline tl_animatePlayer;
 
     private Image playerImage;
-    public static final int OFFSET_X = 13;
-    public static final int OFFSET_Y = 11;
     private double y;
     private double x;
     private int w;
@@ -32,7 +36,17 @@ public class Player extends Entity{
         this.y = y;
         this.w = w;
         this.h = h;
-        playerImage = new Image("images/sprite_player_badass_down1.png",32 * View.scale,32 * View.scale,true,false);
+        int imgCellWidth = 32;
+        int imgCellHeight = 32;
+
+
+
+
+
+
+
+
+
     }
 
     @Override
@@ -43,8 +57,8 @@ public class Player extends Entity{
         g.setStroke(Color.LIMEGREEN);
         g.strokeText("X : " + Double.toString(getX()) + "\n" + "Y : "+ Double.toString(Math.round(getY())) + "\n" + "Entities: " + Integer.toString(Main.NUMBER_OF_INSTANCES), 50 , 50 );
         // draw player
-        g.setFill(playerColor);
-        g.fillRect(getX(),getY(),getW(),getH());
+
+        drawEntity(g);
         drawHealthBar(g);
     }
 
@@ -171,6 +185,11 @@ public class Player extends Entity{
     @Override
     public boolean isAlive() {
         return super.isAlive();
+    }
+
+    @Override
+    public void drawEntity(GraphicsContext g){
+        super.drawEntity(g);
     }
 
     @Override

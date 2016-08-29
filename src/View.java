@@ -76,7 +76,7 @@ public class View extends Canvas{
         
         img = new Image("Images/dark_background.png");
         // loads background image
-        g2.drawImage(img,0,0);
+          g2.drawImage(img,0,0);
         // loads background tiles
         l.drawTiles(g2);
         root.getChildren().addAll(getBackgroundCanvas(),getMiddleGround() ,getForeground());
@@ -88,8 +88,9 @@ public class View extends Canvas{
    public void render(){
         g3.clearRect(0, 0 , WIDTH , HEIGHT);
         g.clearRect(0,0,WIDTH,HEIGHT);
-        Entity.entities.stream().forEach(e -> e.draw(g3));
-
+        for (Entity e : Entity.entities){
+            e.draw(g);
+        }
     }
 }
 
