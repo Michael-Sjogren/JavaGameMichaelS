@@ -19,6 +19,10 @@ import java.util.Scanner;
 
 /** responsible for parsing the map files from Tiled program **/
 public class LoadMap {
+
+    public static int WIDTH;
+    public static int HEIGHT;
+
     private Gson gson = new Gson();
     private StringBuilder sb;
     private JsonObject json_obj;
@@ -30,6 +34,11 @@ public class LoadMap {
     public ArrayList<Layer> layersList = new ArrayList<>();
     public ArrayList<TileSet> tilesetList = new ArrayList<>();
     public ArrayList<ArrayList<Image>> tiles = new ArrayList<>();
+
+    private int map_tile_width;
+    private int map_tile_height;
+
+
     // stores individual tiles of all tile sets according to layer hierarchy
 
     public LoadMap() {
@@ -57,11 +66,19 @@ public class LoadMap {
 
             json_obj = gson.fromJson(sb.toString(), JsonObject.class);
             // static variables
+
             map_cell_width = json_obj.getAsJsonObject().get("width").getAsInt();
             map_cell_height = json_obj.getAsJsonObject().get("height").getAsInt();
+            map_tile_width = json_obj.getAsJsonObject().get("tilewidth").getAsInt();
+            map_tile_height = json_obj.getAsJsonObject().get("tilewidth").getAsInt();
+
+            WIDTH = (map_cell_width * map_tile_width);
+            HEIGHT = (map_cell_height * map_tile_height);
 
             tilesets = json_obj.getAsJsonArray("tilesets");
             layers = json_obj.getAsJsonArray("layers");
+
+
 
             for (int i = 0; i < layers.size(); i++){
                 // parse layers

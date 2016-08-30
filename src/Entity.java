@@ -3,7 +3,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -13,12 +12,14 @@ import java.util.Iterator;
 /**
  * Created by Michael Sjögren on 2016-07-21.
  */
-public class Entity {
 
-    public static ImageView playerRight;
+// TODO make this class abstract
+public abstract class Entity {
+
+
     // delay on the damage since the collision detects too quickly
     private Timeline tl_damageEntity;
-    private Timeline tl_animateEntity;
+
     private Movement movement;
     private double x;
     private double y;
@@ -30,23 +31,20 @@ public class Entity {
     private double gravity = 1;
     public static ArrayList<Projectile> projectiles = new ArrayList<>();
     public static ArrayList<Entity> entities = new ArrayList<>();
-    private static final double velocityFall = 0.1 / 90 ;
+    private static final double velocityFall = 0.1 ;
     private static final double velocityJump = 15;
     private final static int ENTITY_MAX_HP = 5;
     private int hp = ENTITY_MAX_HP;
-    private double offsetX = 0;
-    private double offsetY = 0;
+
     private boolean isAlive = true;
     private Image[] spritesRight;
     private Image[] spritesLeft;
-    private int index = 0;
     private Animation animation;
 
     public static final int LEFT = -1;
     public static final int RIGHT = 1;
     public static final int IDLE = 0;
 
-    private GraphicsContext g;
     private int imageIndex;
     private int prevXaxis = 1;
 

@@ -13,8 +13,7 @@ import javafx.scene.paint.Color;
 public class View extends Canvas{
 
     public static int scale = 3;
-    public static final int WIDTH = 896;
-    public static final int HEIGHT = 896;
+
 
     public static Pane root;
     private LoadMap l;
@@ -44,11 +43,11 @@ public class View extends Canvas{
         this.l = l;
         createForegroundCanvas();
         createBackgroundCanvas();
-        middleGround = new Canvas(WIDTH , HEIGHT);
+        middleGround = new Canvas(LoadMap.WIDTH , LoadMap.HEIGHT);
     }
 
     public void createForegroundCanvas(){
-        foregroundCanvas = new Canvas(WIDTH ,HEIGHT);
+        foregroundCanvas = new Canvas(LoadMap.WIDTH ,LoadMap.HEIGHT);
     }
 
     public Canvas getBackgroundCanvas() {
@@ -56,7 +55,7 @@ public class View extends Canvas{
     }
 
     public void createBackgroundCanvas(){
-        backgroundCanvas = new Canvas(WIDTH , HEIGHT);
+        backgroundCanvas = new Canvas(LoadMap.WIDTH , LoadMap.HEIGHT);
     }
     
     public Canvas getMiddleGround(){
@@ -69,7 +68,7 @@ public class View extends Canvas{
 
     public Parent createContent() {
         root = new Pane();
-        root.setPrefSize(WIDTH , HEIGHT);
+        root.setPrefSize(LoadMap.WIDTH , LoadMap.HEIGHT);
         g = getForeground().getGraphicsContext2D();
         g2 = getBackgroundCanvas().getGraphicsContext2D();
         g3 = getMiddleGround().getGraphicsContext2D();
@@ -86,8 +85,8 @@ public class View extends Canvas{
     }
 
    public void render(){
-        g3.clearRect(0, 0 , WIDTH , HEIGHT);
-        g.clearRect(0,0,WIDTH,HEIGHT);
+        g3.clearRect(0, 0 , LoadMap.WIDTH , LoadMap.HEIGHT);
+        g.clearRect(0,0,LoadMap.WIDTH,LoadMap.HEIGHT);
         for (Entity e : Entity.entities){
             e.draw(g);
         }
