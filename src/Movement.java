@@ -2,6 +2,7 @@
 /**
  * Created by Michael-Sjogren on 2016-07-19.
  */
+/** every instance of an entity subclass has access to this class it moves the entity and checks collision for it**/
 public class Movement {
     public static final int SPEED = 2;
     private double prevX , prevY;

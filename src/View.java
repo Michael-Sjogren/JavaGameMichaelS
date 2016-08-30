@@ -19,7 +19,6 @@ public class View extends Canvas{
     private LoadMap l;
     private Canvas foregroundCanvas , backgroundCanvas;
     private GraphicsContext g , g2;
-    private Image img;
    
 
     
@@ -73,9 +72,10 @@ public class View extends Canvas{
         g2 = getBackgroundCanvas().getGraphicsContext2D();
         g3 = getMiddleGround().getGraphicsContext2D();
         
-        img = new Image("Images/dark_background.png");
-        // loads background image
-          g2.drawImage(img,0,0);
+
+        // background color
+        g2.fillRect(0,0,LoadMap.WIDTH , LoadMap.HEIGHT);
+
         // loads background tiles
         l.drawTiles(g2);
         root.getChildren().addAll(getBackgroundCanvas(),getMiddleGround() ,getForeground());
