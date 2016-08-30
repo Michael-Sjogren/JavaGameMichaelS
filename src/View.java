@@ -74,6 +74,7 @@ public class View extends Canvas{
         
 
         // background color
+        g2.setFill(Color.rgb(214, 215, 228));
         g2.fillRect(0,0,LoadMap.WIDTH , LoadMap.HEIGHT);
 
         // loads background tiles
