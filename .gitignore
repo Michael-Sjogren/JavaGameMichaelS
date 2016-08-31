@@ -54,9 +54,11 @@ Temporary Items
 /bin
 /.settings
 
+
 # Intellij
 # =========================
 /.idea
 JavaGameMichaelS.iml
 /build/
 *.class
+/out/
