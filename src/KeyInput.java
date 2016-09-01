@@ -59,7 +59,7 @@ public class KeyInput implements EventHandler<KeyEvent> {
             case A: LEFT = 0; break;
             case D: RIGHT = 0; break;
             case W: timeline.stop();break;
-            case SPACE:entity.createProjectile(entity.getPrevXaxis(),entity);break;
+            case SPACE:entity.attack(entity.getPrevXaxis(),entity);break;
             default:
             	break;
         }

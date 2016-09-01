@@ -2,7 +2,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -37,9 +36,8 @@ public abstract class Entity {
     private int hp = ENTITY_MAX_HP;
 
     private boolean isAlive = true;
-    private Image[] spritesRight;
-    private Image[] spritesLeft;
-    private Animation animation;
+
+    private SpriteAnimation animation;
 
     public static final int LEFT = -1;
     public static final int RIGHT = 1;
@@ -59,28 +57,27 @@ public abstract class Entity {
         Main.NUMBER_OF_INSTANCES++;
 
         tl_damageEntity = new Timeline(new KeyFrame(
-                Duration.millis(20), ae -> damage()
+                Duration.millis(200)
 
         ), new KeyFrame(Duration.millis(21), ae -> {
+            damage();
             isEntityAlive();
         }));
 
-       Image right = new Image("Images/sprite-enemy-right-sheet.png" , (32 * 8) * View.scale  , 32 * View.scale ,true , false);
-       Image left = new Image("Images/sprite-enemy-left1-sheet.png", (32 * 8) * View.scale  , 32 * View.scale ,true , false);
 
-        SpriteSheetCrop sprCrop = new SpriteSheetCrop();
-        int colums = 8;
-        spritesRight = sprCrop.cropSpriteSheet(right,colums, (int) right.getWidth() / colums,(int) right.getHeight());
-        spritesLeft = sprCrop.cropSpriteSheet(left,colums, (int) left.getWidth() / colums,(int) left.getHeight());
 
-        animation = new SpriteAnimation(Duration.millis(750),8,8 , this);
+        animation = new SpriteAnimation(Duration.millis(750),8,8);
         animation.setCycleCount(Animation.INDEFINITE);
         animation.play();
 
     }
 
     public void draw(GraphicsContext g ){
-        drawProjectiles(g);
+        if(!projectiles.isEmpty()){
+            for (Projectile p :projectiles) {
+                p.draw(g);
+            }
+        }
         drawEntity(g);
         drawHealthBar(g);
 
@@ -89,10 +86,10 @@ public abstract class Entity {
     public void drawHealthBar(GraphicsContext g)
     {
         // TODO make constants for these offsets
-        g.setFill(Color.CRIMSON);
-        g.fillRect(x  ,y-spritesRight[0].getHeight()/2,3*ENTITY_MAX_HP,5);
+        g.setFill(Color.rgb(138,7,7));
+        g.fillRect(x  ,y-Main.ninjaSpritesRight[0].getHeight()/2,3*ENTITY_MAX_HP,5);
         g.setFill(Color.LIMEGREEN);
-        g.fillRect(x , y-spritesRight[0].getHeight()/2,3*hp,5);
+        g.fillRect(x , y-Main.ninjaSpritesRight[0].getHeight()/2,3*hp,5);
 
     }
 
@@ -106,44 +103,29 @@ public abstract class Entity {
     public void animateSelf(GraphicsContext g){
       // TODO make constants for these offsets
         if(xaxis == RIGHT ){
-            g.drawImage(spritesRight[imageIndex] , x - 39  , y - 32);
+            g.drawImage(Main.ninjaSpritesRight[animation.getIndex()] , x - 39  , y - 32);
         }
         
         if(xaxis == IDLE && prevXaxis == RIGHT){
 
-            g.drawImage(spritesRight[0] , x - 39  , y - 32);
+            g.drawImage(Main.ninjaSpritesRight[0] , x - 39  , y - 32);
         }
 
         if(xaxis == LEFT ){
-            g.drawImage(spritesLeft[imageIndex] , x - 39  , y - 32);
+            g.drawImage(Main.ninjaSpritesLeft[animation.getIndex()] , x - 39  , y - 32);
         }
 
         if(xaxis == IDLE && prevXaxis == LEFT ){
 
-            g.drawImage(spritesLeft[0] , x - 39  , y - 32);
-        }
-
-
-    }
-
-    public void drawProjectiles(GraphicsContext g)
-    {
-        if(!projectiles.isEmpty()){
-            for (Projectile p :projectiles) {
-                p.draw(g);
-            }
+            g.drawImage(Main.ninjaSpritesLeft[0] , x - 39  , y - 32);
         }
     }
 
-    public void moveProjectiles(){
-        if(!projectiles.isEmpty()){
-            projectiles.forEach(Projectile::tick);
-        }
-    }
+
+
 
     public void tick()
     {
-        moveProjectiles();
         movement.move();
     }
 
@@ -240,7 +222,7 @@ public abstract class Entity {
     }
 
 
-    public void createProjectile(int xaxis , Entity entity) {
+    public void attack(int xaxis , Entity entity) {
         projectiles.add(new Projectile( getX(),getY(), xaxis, entity));
         Main.NUMBER_OF_INSTANCES++;
         // checks if projectile is out of bounds , if it is it will removed the object from the list.

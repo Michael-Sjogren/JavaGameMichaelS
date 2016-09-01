@@ -36,30 +36,17 @@ public class Player extends Entity{
         this.y = y;
         this.w = w;
         this.h = h;
-        int imgCellWidth = 32;
-        int imgCellHeight = 32;
-
-
-
-
-
-
-
-
-
     }
 
     @Override
     public void draw(GraphicsContext g) {
         // x , y coordinates of player
-        drawProjectiles(g);
+        super.draw(g);
         g.setFont(f);
         g.setStroke(Color.LIMEGREEN);
         g.strokeText("X : " + Double.toString(getX()) + "\n" + "Y : "+ Double.toString(Math.round(getY())) + "\n" + "Entities: " + Integer.toString(Main.NUMBER_OF_INSTANCES), 50 , 50 );
         // draw player
 
-        drawEntity(g);
-        drawHealthBar(g);
     }
 
     @Override
@@ -67,15 +54,6 @@ public class Player extends Entity{
         super.drawHealthBar(g);
     }
 
-    @Override
-    public void moveProjectiles() {
-        super.moveProjectiles();
-    }
-
-    @Override
-    public void drawProjectiles(GraphicsContext g) {
-        super.drawProjectiles(g);
-    }
 
     @Override
     public void tick() {
@@ -168,8 +146,9 @@ public class Player extends Entity{
     }
 
     @Override
-    public void createProjectile(int xaxis , Entity entiy) {
-        super.createProjectile(xaxis , entiy);
+    public void attack(int xaxis , Entity entiy) {
+
+        super.attack(xaxis , entiy);
     }
 
     @Override

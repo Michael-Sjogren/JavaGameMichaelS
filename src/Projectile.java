@@ -1,6 +1,9 @@
+import javafx.animation.Animation;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Material;
+import javafx.util.Duration;
 
 
 /**
@@ -8,19 +11,27 @@ import javafx.scene.paint.Material;
  */
 public class Projectile  {
 
-    public static final int BULLET_WIDTH = 4;
-    public static final int BULLET_HEIGHT = 4;
+    public static final int BULLET_WIDTH = 16;
+    public static final int BULLET_HEIGHT = 16;
     public static final int PROJECTILE_SPEED = 10;
     private boolean isOutOfBounds = false;
+
     private double x , y ;
     private int xaxis;
     private Entity entity;
+    private double rotation = 0;
+    private double rotSpeed = 1;
+    private SpriteAnimation animation;
 
     public Projectile(double x, double y, int xaxis, Entity entity) {
-        this.y = y + entity.getH()/2 - 10;
+        this.y = y - entity.getH() / 2 + 10;
         setBulletStartPos(x);
         this.xaxis = xaxis;
         this.entity = entity;
+        animation = new SpriteAnimation(Duration.millis(150),10,10);
+        animation.setCycleCount(Animation.INDEFINITE);
+        animation.play();
+
     }
 
 
@@ -41,7 +52,8 @@ public class Projectile  {
     public void tick(){
         // if its inside the screen render and move the bullet
            setX(getX() + PROJECTILE_SPEED * getXaxis());
-           if(BBox.checkProjectileCollision(x,x+BULLET_WIDTH,y,y+BULLET_HEIGHT , entity))
+
+           if(BBox.checkProjectileCollision(x,x+BULLET_WIDTH,y,y+BULLET_HEIGHT , entity) && (x < LoadMap.WIDTH && x > 0 ))
            {
                isOutOfBounds = true;
            }
@@ -50,8 +62,8 @@ public class Projectile  {
 
    public void draw(GraphicsContext g){
        if(!isOutOfBounds){
-           g.setFill(Color.DARKGOLDENROD);
-           g.fillOval(getX(),getY(),BULLET_WIDTH,BULLET_HEIGHT);
+           g.setFill(Color.BLACK);
+           g.drawImage(Main.ninjaStarSprites[animation.getIndex()],x,y);
        }else {
            return;
        }
@@ -69,14 +81,6 @@ public class Projectile  {
 
     public void setX(double x){
         this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-       this.y = y;
     }
 
     public int getXaxis() {

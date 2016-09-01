@@ -1,7 +1,6 @@
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 
-import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 
@@ -18,14 +17,14 @@ public class SpriteAnimation extends Transition {
     private Entity e;
 
     private int lastIndex;
+    private int index;
 
 
-    public SpriteAnimation(Duration duration, int count, int columns , Entity e) {
+    public SpriteAnimation(Duration duration, int count, int columns) {
 
         this.duration = duration;
         this.count     = count;
         this.columns   = columns;
-        this.e = e;
 
 
         setCycleDuration(duration);
@@ -38,9 +37,17 @@ public class SpriteAnimation extends Transition {
 
         int index = Math.min((int) Math.floor(k * count), count - 1);
         if (index != lastIndex) {
-            e.setImageIndex(index);
+            setIndex(index);
             lastIndex = index;
         }
+    }
+
+    public int getIndex(){
+        return index;
+    }
+
+    public void setIndex(int index){
+        this.index = index;
     }
 
 }

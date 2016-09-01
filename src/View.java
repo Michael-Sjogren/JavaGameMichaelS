@@ -32,6 +32,9 @@ public class View extends Canvas{
 
 
                 Entity.entities.forEach(Entity::tick);
+                if(!Entity.projectiles.isEmpty()){
+                    Entity.projectiles.forEach(Projectile::tick);
+                }
             }
         };
 
@@ -68,14 +71,17 @@ public class View extends Canvas{
     public Parent createContent() {
         root = new Pane();
         root.setPrefSize(LoadMap.WIDTH , LoadMap.HEIGHT);
+
+        // background image
+        Image background = new Image("Images/background2.png");
         g = getForeground().getGraphicsContext2D();
         g2 = getBackgroundCanvas().getGraphicsContext2D();
         g3 = getMiddleGround().getGraphicsContext2D();
         
 
         // background color
-        g2.setFill(Color.rgb(214, 215, 228));
-        g2.fillRect(0,0,LoadMap.WIDTH , LoadMap.HEIGHT);
+
+        g2.drawImage(background , 0 , 0);
 
         // loads background tiles
         l.drawTiles(g2);
@@ -86,6 +92,7 @@ public class View extends Canvas{
     }
 
    public void render(){
+
         g3.clearRect(0, 0 , LoadMap.WIDTH , LoadMap.HEIGHT);
         g.clearRect(0,0,LoadMap.WIDTH,LoadMap.HEIGHT);
         for (Entity e : Entity.entities){
