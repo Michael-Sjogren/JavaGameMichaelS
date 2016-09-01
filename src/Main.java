@@ -31,15 +31,15 @@ public class Main extends Application  {
 
         // instantiate imageCropper class
         SpriteSheetCrop sprCrop = new SpriteSheetCrop();
-        Image right = new Image("Images/sprite-enemy-right-sheet.png" , (32 * 8) * View.scale  , 32 * View.scale ,true , false);
-        Image left = new Image("Images/sprite-enemy-left1-sheet.png", (32 * 8) * View.scale  , 32 * View.scale ,true , false);
+        Image right = new Image("Images/ninja/sprite-enemy-right-sheet.png", (32 * 8) * View.scale  , 32 * View.scale ,true , false);
+        Image left = new Image("Images/ninja/sprite-enemy-left1-sheet.png", (32 * 8) * View.scale  , 32 * View.scale ,true , false);
         int colums = 8;
         ninjaSpritesRight = sprCrop.cropSpriteSheet(right,colums, (int) right.getWidth() / colums,(int) right.getHeight());
         ninjaSpritesLeft = sprCrop.cropSpriteSheet(left,colums, (int) left.getWidth() / colums,(int) left.getHeight());
-        ninjaStarSprites = sprCrop.cropSpriteSheet(new Image("Images/ninja-star2.png"),10,32,32);
+        ninjaStarSprites = sprCrop.cropSpriteSheet(new Image("Images/ninja/ninja-star2.png"),10,32,32);
 
-        ninjaAttackLeft = sprCrop.cropSpriteSheet(new Image("Images/ninja-attack-left.png"),8,32,32);
-        ninjaAttackRight = sprCrop.cropSpriteSheet(new Image("Images/ninja-attack-rightt.png"),8,32,32);
+        ninjaAttackLeft = sprCrop.cropSpriteSheet(new Image("Images/ninja/ninja-attack-left.png"),8,32,32);
+        ninjaAttackRight = sprCrop.cropSpriteSheet(new Image("Images/ninja/ninja-attack-rightt.png"),8,32,32);
 
         keyInput = new KeyInput(player);
        // map = new MapObjects();
