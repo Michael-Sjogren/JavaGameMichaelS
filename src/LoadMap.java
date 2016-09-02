@@ -161,9 +161,9 @@ public class LoadMap {
                    // for loop that iterates over every layer with a data map and renders them in
                    for (int i = 0; i < layerDataList.size(); i++){
                         if (layerDataList.get(i)[row][col] > 0){
-                            for (int k = 0; k < tiles.size(); k ++){
-                                    g.drawImage(tiles.get(k).get(layerDataList.get(i)[row][col]-1),col*32 ,row*32);
-                                }
+
+                                    g.drawImage(tiles.get(0).get(layerDataList.get(i)[row][col]-1),col*32 ,row*32);
+
                             }
                         }
                 	}

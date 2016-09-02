@@ -73,7 +73,7 @@ public class View extends Canvas{
         root.setPrefSize(LoadMap.WIDTH , LoadMap.HEIGHT);
 
         // background image
-        Image background = new Image("Images/background2.png");
+        Image background = new Image("Images/tile-bg896x896.png");
         g = getForeground().getGraphicsContext2D();
         g2 = getBackgroundCanvas().getGraphicsContext2D();
         g3 = getMiddleGround().getGraphicsContext2D();
