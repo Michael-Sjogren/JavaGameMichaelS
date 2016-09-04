@@ -53,7 +53,7 @@ public class Projectile  {
         // if its inside the screen render and move the bullet
            setX(getX() + PROJECTILE_SPEED * getXaxis());
 
-           if(BBox.checkProjectileCollision(x,x+BULLET_WIDTH,y,y+BULLET_HEIGHT , entity) && (x < LoadMap.WIDTH && x > 0 ))
+           if(BBox.checkProjectileCollision(x + BULLET_WIDTH / 2,x+BULLET_WIDTH,y + BULLET_HEIGHT / 2,y+BULLET_HEIGHT , entity) && (x < LoadMap.WIDTH && x > 0 ))
            {
                isOutOfBounds = true;
            }
@@ -62,8 +62,7 @@ public class Projectile  {
 
    public void draw(GraphicsContext g){
        if(!isOutOfBounds){
-           g.setFill(Color.BLACK);
-           g.drawImage(Main.ninjaStarSprites[animation.getIndex()],x,y);
+           g.drawImage(Main.ninjaStarSprites[animation.getIndex()],x + BULLET_WIDTH / 2 ,y + BULLET_HEIGHT / 2);
        }else {
            return;
        }
