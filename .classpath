@@ -6,7 +6,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/lib/gson-2.7.jar"/>
-	<classpathentry kind="lib" path="src/lib/gson-2.7-javadoc.jar"/>
+	<classpathentry exported="true" kind="lib" path="src/lib/gson-2.7.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
