@@ -1,20 +1,5 @@
 # JavaGameMichaelS - Working title
 
-#### **Opening Project Instructions**
-
-Clone or download project , then import the project.
-
-## Intellij:
-
-Select "Create project from existing sources" radio button and continue pressing next , make sure the libaries are selected and then finnish.
-
-## Eclipse
-import as general project.
-Go to Project build path then choose Project facets and pick java , apply.
-After that you will neeed to add gson libary.
-Go to project Properties -> configure build path -> java build path.
-in java build path , pick the libary tab and add jar , the gson jar is in src/lib
-
 ### A javafx 2d game with basic platforming mechanics.
 
 #### **Game Instructions**
@@ -36,3 +21,19 @@ This Project Uses Gson to parse the mapdata.
 There is a folder called 'lib' in 'project/src' that has the required jars.
 
 Only orthogonal maps are compatible , and one tileset per map file.
+
+#### **Opening Project Instructions**
+
+Clone or download project , then import the project.
+
+## Intellij:
+
+Select "Create project from existing sources" radio button and continue pressing next , make sure the libaries are selected and then finnish.
+
+## Eclipse
+import as general project.
+Go to Project build path then choose Project facets and pick java , apply.
+After that you will neeed to add gson libary.
+Go to project Properties -> configure build path -> java build path.
+in java build path , pick the libary tab and add jar , the gson jar is in src/lib
+
