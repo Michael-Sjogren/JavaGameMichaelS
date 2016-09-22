@@ -22,7 +22,7 @@ There is a folder called 'lib' in 'project/src' that has the required jars.
 
 Only orthogonal maps are compatible , and one tileset per map file.
 
-## **Opening Project**
+## **Opening the Project**
 
 Clone or download project.
 
