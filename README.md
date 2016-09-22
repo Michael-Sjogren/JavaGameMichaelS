@@ -24,7 +24,7 @@ Only orthogonal maps are compatible , and one tileset per map file.
 
 ## **Opening Project**
 
-Clone or download project , then import the project.
+Clone or download project.
 
 ## Intellij:
 
