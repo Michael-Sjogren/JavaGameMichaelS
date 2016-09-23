@@ -62,3 +62,5 @@ JavaGameMichaelS.iml
 /build/
 *.class
 /out/
+classes/artifacts/JavaGameMichaelS_jar/JavaGameMichaelS.jar
+src/META-INF/MANIFEST.MF
