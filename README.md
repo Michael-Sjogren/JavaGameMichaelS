@@ -1,6 +1,6 @@
 # JavaGameMichaelS - Working title
 
-### A javafx 2d game with basic platforming mechanics.
+A javafx 2d game with basic platforming mechanics.
 
 #### **Game Instructions**
 
