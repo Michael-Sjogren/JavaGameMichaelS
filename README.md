@@ -2,6 +2,8 @@
 
 A javafx 2d game with basic platforming mechanics.
 
+To play the game you can either open the project in an IDE or download JavaGameMichaelS.jar and run it.
+
 #### **Game Instructions**
 
 ##### **SPACE : SHOOT**
