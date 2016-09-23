@@ -18,8 +18,6 @@ in Json format to generate tiles and collision objects.
 
 This Project Uses Gson to parse the mapdata.
 
-There is a folder called 'lib' in 'project/src' that has the required jars.
-
 Only orthogonal maps are compatible , and one tileset per map file.
 
 ## **Opening the Project**
@@ -35,5 +33,5 @@ import as general project.
 Go to Project build path then choose Project facets and pick java , apply.
 After that you will neeed to add gson libary.
 Go to project Properties -> configure build path -> java build path.
-in java build path , pick the libary tab and add jar , the gson jar is in src/lib
+in java build path , pick the libary tab and add Gson.jar that is in src/lib.
 
