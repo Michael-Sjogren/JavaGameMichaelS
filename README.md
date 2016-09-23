@@ -26,7 +26,8 @@ Clone or download the project.
 
 ## Intellij:
 
-Select "Create project from existing sources" radio button and continue pressing next , make sure the libaries are selected and then finnish.
+Select "Create project from existing sources" radio button.
+Then continue pressing next meanwhile making sure the libaries are selected and then press finnish.
 
 ## Eclipse
 import as general project.
