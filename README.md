@@ -4,7 +4,14 @@
 A javafx 2d game with basic platforming mechanics.
 The game is a work in progress , right now you can jump around on the platfroms and throw ninjastars at the static enemy ninja.
 
+### Libaries and tools im using
+I have implemented code to read the save files from the program:  
+[Tiled](http://www.mapeditor.org/ "Tiled Map Editor")
+in Json format to generate tiles and collision objects.
 
+This Project Uses the **Gson** libary to parse the mapdata into java pojo's.
+
+Only orthogonal maps are compatible , and one tileset per map file.
 ## **Game Instructions**
 
 To play the game you can either open the project in an IDE or download JavaGameMichaelS.jar and run it.
@@ -16,15 +23,6 @@ To play the game you can either open the project in an IDE or download JavaGameM
 ##### **A :   LEFT**
 
 ##### **D :   RIGHT**
-
-
-I've also have implemented code to read the save files from the program:  
-[Tiled](http://www.mapeditor.org/ "Tiled Map Editor")
-in Json format to generate tiles and collision objects.
-
-This Project Uses Gson to parse the mapdata.
-
-Only orthogonal maps are compatible , and one tileset per map file.
 
 ## **Opening the Project**
 
