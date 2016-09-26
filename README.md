@@ -2,7 +2,7 @@
 
 ## **Game Description**
 A javafx 2d game with basic platforming mechanics.
-The game is a work in progress , right now you can jump around on the platfroms and throw ninjastars at the static enemy ninja.
+The game is a work in progress , right now you can jump around on the platfroms and throw ninjastars at the stationary enemy ninja.
 
 ### Libaries and tools im using
 I have implemented code to read the save files from the program:  
