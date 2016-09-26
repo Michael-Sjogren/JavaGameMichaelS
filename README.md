@@ -1,10 +1,13 @@
 # JavaGameMichaelS - Working title
 
+## **Game Description**
 A javafx 2d game with basic platforming mechanics.
+The game is a work in progress , right now you can jump around on the platfroms and throw ninjastars at the static enemy ninja.
 
-To play the game you can either open the project in an IDE or download JavaGameMichaelS.jar and run it.
 
 ## **Game Instructions**
+
+To play the game you can either open the project in an IDE or download JavaGameMichaelS.jar and run it.
 
 ##### **SPACE : SHOOT**
 
@@ -14,7 +17,6 @@ To play the game you can either open the project in an IDE or download JavaGameM
 
 ##### **D :   RIGHT**
 
-The game is a work in progress , right now you can jump around on the platfroms and throw ninjastars at the static enemy ninja.
 
 I've also have implemented code to read the save files from the program:  
 [Tiled](http://www.mapeditor.org/ "Tiled Map Editor")
