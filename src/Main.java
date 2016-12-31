@@ -49,6 +49,7 @@ public class Main extends Application  {
         map.createCollisionObjects();
         map.loadTilesetImages();
         stage.setScene(new Scene(view.createContent()));
+        view.startgame();
 
         stage.setWidth(LoadMap.WIDTH+6);
         stage.setHeight(LoadMap.HEIGHT + 25);
@@ -58,6 +59,11 @@ public class Main extends Application  {
         stage.setResizable(false);
         stage.show();
 
+    }
+
+
+    public void stop(){
+        view.endgame();
     }
 
 

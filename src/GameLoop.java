@@ -20,6 +20,9 @@ public class GameLoop extends Thread {
         this.g3 = g3;
     }
 
+    public void stopLoop(){
+        running = false;
+    }
 
     @Override
     public void run() {

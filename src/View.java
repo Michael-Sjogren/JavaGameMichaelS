@@ -19,6 +19,7 @@ public class View {
     private LoadMap l;
     private Canvas foregroundCanvas , backgroundCanvas , middleGround;
     private GraphicsContext g , g2 , g3;
+    private GameLoop loop;
 
     public View(LoadMap l ) {
         this.l = l;
@@ -57,7 +58,7 @@ public class View {
         g2 = getBackgroundCanvas().getGraphicsContext2D();
         g3 = getMiddleGround().getGraphicsContext2D();
         
-        GameLoop loop = new GameLoop(g , g2 , g3);
+         loop = new GameLoop(g , g2 , g3);
         // background color
 
         g2.drawImage(background , 0 , 0);
@@ -66,9 +67,20 @@ public class View {
         l.drawTiles(g2);
         root.getChildren().addAll(getBackgroundCanvas(),getMiddleGround() ,getForeground());
         // starts loop
-        loop.start();
-
         return root;
+    }
+
+    public void startgame(){
+        loop.start();
+    }
+
+    public void endgame(){
+        loop.stopLoop();
+        try {
+            loop.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
 
