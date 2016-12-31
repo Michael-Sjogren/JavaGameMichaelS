@@ -71,7 +71,5 @@ public class KeyInput implements EventHandler<KeyEvent> {
     public void handle(KeyEvent event) {
         checkInput(event);
     }
-
-
-
 }
+

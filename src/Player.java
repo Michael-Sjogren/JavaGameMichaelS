@@ -46,7 +46,6 @@ public class Player extends Entity{
         g.setStroke(Color.LIMEGREEN);
         g.strokeText("X : " + Double.toString(getX()) + "\n" + "Y : "+ Double.toString(Math.round(getY())) + "\n" + "Entities: " + Integer.toString(Main.NUMBER_OF_INSTANCES), 50 , 50 );
         // draw player
-
     }
 
     @Override

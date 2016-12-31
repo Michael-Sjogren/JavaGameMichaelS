@@ -10,36 +10,15 @@ import javafx.scene.paint.Color;
 /**
  * Created by Michael Sjögren on 2016-07-19.
  */
-public class View extends Canvas{
+public class View {
 
     public static int scale = 3;
 
 
     public static Pane root;
     private LoadMap l;
-    private Canvas foregroundCanvas , backgroundCanvas;
-    private GraphicsContext g , g2;
-   
-
-    
-
-        AnimationTimer engine = new AnimationTimer()
-        {
-            @Override
-            public void handle(long now)
-            {
-                render();
-
-
-                Entity.entities.forEach(Entity::tick);
-                if(!Entity.projectiles.isEmpty()){
-                    Entity.projectiles.forEach(Projectile::tick);
-                }
-            }
-        };
-
-	private Canvas middleGround;
-	private GraphicsContext g3;
+    private Canvas foregroundCanvas , backgroundCanvas , middleGround;
+    private GraphicsContext g , g2 , g3;
 
     public View(LoadMap l ) {
         this.l = l;
@@ -78,7 +57,7 @@ public class View extends Canvas{
         g2 = getBackgroundCanvas().getGraphicsContext2D();
         g3 = getMiddleGround().getGraphicsContext2D();
         
-
+        GameLoop loop = new GameLoop(g , g2 , g3);
         // background color
 
         g2.drawImage(background , 0 , 0);
@@ -86,18 +65,10 @@ public class View extends Canvas{
         // loads background tiles
         l.drawTiles(g2);
         root.getChildren().addAll(getBackgroundCanvas(),getMiddleGround() ,getForeground());
-        // starts animation timer
-        engine.start();
+        // starts loop
+        loop.start();
+
         return root;
-    }
-
-   public void render(){
-
-        g3.clearRect(0, 0 , LoadMap.WIDTH , LoadMap.HEIGHT);
-        g.clearRect(0,0,LoadMap.WIDTH,LoadMap.HEIGHT);
-        for (Entity e : Entity.entities){
-            e.draw(g);
-        }
     }
 }
 
