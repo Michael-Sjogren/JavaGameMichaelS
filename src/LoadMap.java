@@ -52,7 +52,7 @@ public class LoadMap {
      * reads the json data from a file and concatenates it into string witch is later turned into a json object
      **/
     public void loadJsonData() {
-        try(InputStream is = LoadMap.class.getResourceAsStream("/maps/2dMap.json")) {
+        try(InputStream is = LoadMap.class.getResourceAsStream("/maps/green-room.json")) {
 
             Scanner sc = new Scanner(new BufferedReader(new InputStreamReader(is)));
             sb = new StringBuilder();
@@ -116,8 +116,8 @@ public class LoadMap {
     public void loadTilesetImages() {
         // in order for this to work all tileset images must be in the project file : src/tilesets/..
         for (int i = 0; i < tilesetList.size(); i++) {
-            // i substring away the src/
-            Image img = new Image(tilesetList.get(i).getImage().substring(3) ,0 ,0 , false ,false);
+
+            Image img = new Image(tilesetList.get(i).getImage() ,0 ,0 , false ,false);
             int tile_width = tilesetList.get(i).getTilewidth();
             int tile_height = tilesetList.get(i).getTileheight();
 

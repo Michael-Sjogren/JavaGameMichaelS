@@ -60,8 +60,9 @@ public class View {
         
          loop = new GameLoop(g , g2 , g3);
         // background color
-
-        g2.drawImage(background , 0 , 0);
+        g2.setFill(Color.rgb(82, 135, 221));
+        g2.fillRect(0 , 0 , LoadMap.WIDTH , LoadMap.HEIGHT);
+      //  g2.drawImage(background , 0 , 0);
 
         // loads background tiles
         l.drawTiles(g2);
