@@ -14,7 +14,7 @@ This Project Uses the **Gson** libary to parse the mapdata into java pojo's.
 Only orthogonal maps are compatible , and one tileset per map file.
 ## **Game Instructions**
 
-To play the game you can either open the project in an IDE or download JavaGameMichaelS.jar and run it.
+To play the game you can either open the project in an IDE or download Game.jar and run it.
 
 ##### **SPACE : SHOOT**
 
