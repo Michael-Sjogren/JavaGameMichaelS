@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -116,8 +117,8 @@ public class LoadMap {
     public void loadTilesetImages() {
         // in order for this to work all tileset images must be in the project file : src/tilesets/..
         for (int i = 0; i < tilesetList.size(); i++) {
-
-            Image img = new Image(tilesetList.get(i).getImage() ,0 ,0 , false ,false);
+            System.out.println(tilesetList.get(i).getImage().substring(3));
+            Image img = new Image(tilesetList.get(i).getImage().substring(3) ,0 ,0 , false ,false);
             int tile_width = tilesetList.get(i).getTilewidth();
             int tile_height = tilesetList.get(i).getTileheight();
 
