@@ -65,10 +65,10 @@ public class GameLoop extends Thread {
     }
 
     public void update(){
-        Entity.entities.forEach(Entity::tick);
-        if(!Entity.projectiles.isEmpty()){
-            Entity.projectiles.forEach(Projectile::tick);
-        }
+            Entity.entities.forEach(Entity::tick);
+            if (!Entity.projectiles.isEmpty()) {
+                Entity.projectiles.forEach(Projectile::tick);
+            }
     }
 
     public void render(){

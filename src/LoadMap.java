@@ -118,9 +118,9 @@ public class LoadMap {
         // in order for this to work all tileset images must be in the project file : src/tilesets/..
         for (int i = 0; i < tilesetList.size(); i++) {
             System.out.println(tilesetList.get(i).getImage().substring(3));
-            Image img = new Image(tilesetList.get(i).getImage().substring(3) ,0 ,0 , false ,false);
             int tile_width = tilesetList.get(i).getTilewidth();
             int tile_height = tilesetList.get(i).getTileheight();
+            Image img = new Image(tilesetList.get(i).getImage().substring(3) , tile_width * View.scale , tile_height * View.scale , true ,false);
 
             int img_cell_width = (int)  (img.getHeight() / tile_height );
             int img_cell_height = (int) (img.getWidth() / tile_width );
