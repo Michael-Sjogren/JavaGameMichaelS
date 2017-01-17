@@ -120,10 +120,9 @@ public class LoadMap {
             System.out.println(tilesetList.get(i).getImage().substring(3));
             int tile_width = tilesetList.get(i).getTilewidth();
             int tile_height = tilesetList.get(i).getTileheight();
-            Image img = new Image(tilesetList.get(i).getImage().substring(3) , tile_width * View.scale , tile_height * View.scale , true ,false);
-
-            int img_cell_width = (int)  (img.getHeight() / tile_height );
-            int img_cell_height = (int) (img.getWidth() / tile_width );
+            int img_cell_width = (int)(tilesetList.get(i).getImageheight() / tile_height );
+            int img_cell_height = (int)(tilesetList.get(i).getImagewidth() / tile_width );
+            Image img = new Image(tilesetList.get(i).getImage().substring(3) , tilesetList.get(i).getImagewidth() , tilesetList.get(i).getImageheight(), false ,false);
 
             ArrayList<Image> tile = new ArrayList<>();
           for (int row = 0; row < img_cell_width; row++){
@@ -134,6 +133,7 @@ public class LoadMap {
           }
             tiles.add(tile);
         }
+        System.out.println(tiles.get(0).size());
     }
 
     public void fillLayerDataArray() {
