@@ -1,4 +1,4 @@
-# JavaGameMichaelS - Working title
+# Ninjas 'n' stuff - Working title
 
 ## **Game Description**
 A javafx 2d game with basic platforming mechanics.
